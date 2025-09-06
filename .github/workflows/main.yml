@@ -35,7 +35,7 @@ jobs:
           echo "Executing the binary:"
           ./target/release/MacOS-Stealer-in-      
       - name: Upload binary
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: macos-stealer
           path: target/release/MacOS-Stealer-in-Rust
