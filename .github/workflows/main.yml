@@ -1,0 +1,41 @@
+name: Build and Run on macOS
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-run:
+    name: Build and Run on macOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Cache Cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Build project
+        run: cargo build --release
+
+      - name: Run executable
+        run: |
+          echo "Executing the binary:"
+          ./target/release/MacOS-Stealer-in-      
+      - name: Upload binary
+        uses: actions/upload-artifact@v3
+        with:
+          name: macos-stealer
+          path: target/release/MacOS-Stealer-in-Rust
